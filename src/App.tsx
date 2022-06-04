@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import modelJSON from './assets/model/model.json?url';
 import * as tf from '@tensorflow/tfjs';
 import { Rank, Tensor } from '@tensorflow/tfjs';
 import pica from 'pica';
@@ -7,7 +6,7 @@ import Grid from '@mui/material/Grid';
 import { Button, Typography } from '@mui/material';
 
 const pic = pica();
-const model = await tf.loadLayersModel(modelJSON);
+const model = await tf.loadLayersModel('model/model.json');
 
 export default function App() {
   const canvasRef = useRef(null as HTMLCanvasElement | null);
