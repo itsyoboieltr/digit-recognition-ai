@@ -50,7 +50,7 @@ export default function App() {
         const count =
           imgData.data[i] + imgData.data[i + 1] + imgData.data[i + 2];
         if (count > 383) pixels.push(0);
-        else pixels.push(255);
+        else pixels.push(1);
       }
       const prediction = tf.tidy(() => {
         const img = tf.tensor([chunkArray(pixels, 28)]);
