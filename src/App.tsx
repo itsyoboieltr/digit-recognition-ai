@@ -3,12 +3,14 @@ import * as tf from '@tensorflow/tfjs';
 import { Rank, Tensor } from '@tensorflow/tfjs';
 import pica from 'pica';
 import Grid from '@mui/material/Grid';
-import { Button, Typography } from '@mui/material';
+import { Button, createTheme, IconButton, Typography } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 const pic = pica();
 const model = await tf.loadLayersModel('model/model.json');
 
 export default function App() {
+  const theme = createTheme();
   const canvasRef = useRef(null as HTMLCanvasElement | null);
   const contextRef = useRef(null as CanvasRenderingContext2D | null);
   const [isDrawing, setIsDrawing] = useState<boolean>();
@@ -65,12 +67,36 @@ export default function App() {
     <>
       <Grid container spacing={1} justifyContent={'center'}>
         <Grid item xs={12} sx={{ textAlign: 'center' }}>
-          <Typography variant={'h5'} children={'Digit Recognition AI'} />
-          <Typography
-            children={'Author: Norbert Elter'}
-            sx={{ cursor: 'pointer' }}
-            onClick={() => window.open('https://github.com/itsyoboieltr')}
-          />
+          <Typography component={'div'} variant={'h5'}>
+            Digit Recognition AI
+            <IconButton
+              sx={{ ml: 0.5 }}
+              onClick={() =>
+                window.open(
+                  'https://github.com/itsyoboieltr/digit-recognition-ai'
+                )
+              }>
+              <GitHubIcon sx={{ color: 'black' }} />
+            </IconButton>
+          </Typography>
+          <Typography component={'div'} sx={{ fontWeight: 'lighter' }}>
+            Author:{' '}
+            <Typography
+              children={'Norbert Elter'}
+              onClick={() => window.open('https://github.com/itsyoboieltr')}
+              sx={{
+                fontWeight: 'lighter',
+                display: 'inline',
+                cursor: 'pointer',
+                '&:hover': {
+                  color: theme.palette.primary.main,
+                  transition: theme.transitions.create('color', {
+                    duration: theme.transitions.duration.shortest,
+                  }),
+                },
+              }}
+            />
+          </Typography>
         </Grid>
         <Grid item xs={0}>
           <canvas
